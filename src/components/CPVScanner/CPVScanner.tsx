@@ -79,6 +79,18 @@ export const CPVScanner = (): JSX.Element => {
 
   const onHCERTStatus = (status: HCERTStatus) => {
     setStatus(status);
+    const listOfStatus = [
+      'FullVaccination',
+      'PartialVaccination',
+      'NotVaccinated',
+      'TestResultNegative',
+      'TestResultPositive',
+      'TestResultExpired',
+      'SignatureVerificationError',
+      'UnknownError',
+    ];
+    console.log(status);
+    console.log(listOfStatus[status]);
   };
 
   return (

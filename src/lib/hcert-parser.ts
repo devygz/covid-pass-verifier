@@ -58,11 +58,15 @@ const parseBarcode = (payload: string): Uint8Array => {
   const supportedVersions = ['1'];
 
   if (!/^HC[1-9A-Z]:/.test(payload)) {
-    throw new Error('missing HCERT context indetifier in barcode payload');
+    payload = 'HC1:' + payload;
+    console.info('HCx Prefix not detected, added HC1 automatically.');
+    //throw new Error('missing HCERT context indetifier in barcode payload');
   }
 
   const version = payload[2];
   if (!supportedVersions.includes(version)) {
+    localStorage.setItem('DGCReadComplete', 'true');
+    localStorage.setItem('DGCReadResult', 'Abort-UnknownVersion');
     throw new Error(`unsupportted HCERT version: ${version}`);
   }
 
@@ -110,10 +114,14 @@ export const parseHCERT = async (barcodePayload: string): Promise<HCERT> => {
   if (!isExcluded) {
     const crt = findCertificate(kid);
     if (crt === undefined) {
+      localStorage.setItem('DGCReadComplete', 'true');
+      localStorage.setItem('DGCReadResult', 'Abort-UnknownSigning');
       throw new Error(`could not find certificate for kid: ${kid.toString('hex')}`);
     }
 
     if (crt.pub === null) {
+      localStorage.setItem('DGCReadComplete', 'true');
+      localStorage.setItem('DGCReadResult', 'Abort-UnknownSigning');
       throw new Error(`could not find public key in certificate for kid: ${kid.toString('hex')}`);
     }
 
@@ -123,6 +131,10 @@ export const parseHCERT = async (barcodePayload: string): Promise<HCERT> => {
     } finally {
       // Do nothing here, sig is either false or true depending whether cose.sign.verify threw or not.
     }
+  } else {
+    console.warn('TEST SIGNING');
+    localStorage.setItem('DGCReadComplete', 'true');
+    localStorage.setItem('DGCReadResult', 'Abort-TestSigning');
   }
 
   // Decode the claims in the payload.

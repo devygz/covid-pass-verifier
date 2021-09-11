@@ -47,6 +47,7 @@ const hcertMetadataMappings: HCERTMappings<HCERT> = {
   },
 };
 
+//localStorage.setItem('DGCData-IssuedAt', formatTimestamp(h.iat));
 const hcertVaccineMappings: HCERTMappings<VaccinationEntry> = {
   Vaccine: {
     'Target Disease': (v) => getTargetDisease(v.tg),
@@ -71,8 +72,13 @@ const hcertTestMappings: HCERTMappings<TestEntry> = {
     'Country of Test': (t) => t.co,
     'Certificate Issuer': (t) => t.is,
   },
+  TTT: {
+    abc: (t) => {
+      console.log(t.tg);
+      return 'abc';
+    },
+  },
 };
-
 export const CPVQrDataTable = ({ qrData, onHCERTStatus }: Props): JSX.Element => {
   const [hcert, setHCERT] = useState<HCERT | null>(null);
 
