@@ -7,43 +7,43 @@ import { HCERTStatus } from '@cpv/lib/hcert-verification';
 
 const hcertStatusMapping = {
   [HCERTStatus.PartiallyVaccinated]: {
-    icon: <CheckmarkFilledWarning32 />,
-    label: 'Partially Vaccinated',
+    icon: <CheckmarkFilled32 />,
+    label: 'Okuma Başarılı',
     className: 'amber',
   },
   [HCERTStatus.FullyVaccinated]: {
     icon: <CheckmarkFilled32 />,
-    label: 'Fully Vaccinated',
+    label: 'Okuma Başarılı',
     className: 'green',
   },
   [HCERTStatus.NotVaccinated]: {
-    icon: <Misuse32 />,
-    label: 'Not Vaccinated',
+    icon: <CheckmarkFilled32 />,
+    label: 'Okuma Başarılı',
     className: 'red',
   },
   [HCERTStatus.Negative]: {
     icon: <CheckmarkFilled32 />,
-    label: 'Negative',
+    label: 'Okuma Başarılı',
     className: 'green',
   },
   [HCERTStatus.Positive]: {
-    icon: <AddAlt32 />,
-    label: 'Positive',
+    icon: <CheckmarkFilled32 />,
+    label: 'Okuma Başarılı',
     className: 'red',
   },
   [HCERTStatus.Expired]: {
     icon: <Misuse32 />,
-    label: 'Expired',
+    label: 'Süresi Dolmuş',
     className: 'red',
   },
   [HCERTStatus.UnverifiedSignature]: {
     icon: <Misuse32 />,
-    label: 'Unverified Signature',
+    label: 'Doğrulanmamış İmza',
     className: 'red',
   },
   [HCERTStatus.Error]: {
     icon: <Misuse32 />,
-    label: 'Error',
+    label: 'Hata',
     className: 'red',
   },
 };
@@ -99,7 +99,7 @@ export const CPVScanner = (): JSX.Element => {
         <Grid className="cpv-scanner__grid" condensed={true}>
           <Row>
             <Column sm={2}>
-              <Button onClick={startScanning}>Scan QR Code</Button>
+              <Button onClick={startScanning}>Taramaya Başla</Button>
             </Column>
             <Column sm={2}>{status !== null && <CPVCertificateStatus status={status} />}</Column>
           </Row>
@@ -108,7 +108,7 @@ export const CPVScanner = (): JSX.Element => {
       {isScanning && (
         <div>
           <Button kind="danger" onClick={stopScanning}>
-            Stop scanning
+            Taramayı Durdur
           </Button>
           <CPVQrReader onQrData={onQrData} />
         </div>

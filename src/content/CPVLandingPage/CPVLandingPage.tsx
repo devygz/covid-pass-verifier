@@ -5,15 +5,18 @@ export const CPVLandingPage = (): JSX.Element => (
   <div className="bx--grid cpv-landing-page__grid">
     <div className="bx--row cpv-landing-page__banner">
       <div className="bx--col-lg-16">
-        <h1 className="cpv-landing-page__heading">COVID Pass Verifier</h1>
+        <h1 className="cpv-landing-page__heading">COVID Bilgisi Ekleme</h1>
         <h2 className="cpv-landing-page__subheading">
-          Scan and verify HCERT compliant government-issued COVID-19 passes.
+          Aşı, test ve bağışıklık bilginizi sadece barkodu taratarak ekleyin.
         </h2>
       </div>
     </div>
     <div className="bx--row">
       <div className="bx--col-lg-16">
-        <p>Compatible with EU Digital COVID Certificates 🇪🇺 and NHS COVID Passes 🇬🇧.</p>
+        <p>
+          Aşı / Test / Bağışıklık bilginizi eklemek için Taramaya Başla butonuna dokunun ve aşı kartınızdaki{' '}
+          <b>EU Digital COVID Certificate (AB Dijital COVID Sertifikası)</b> bölümünde yer alan karekodu okutun.
+        </p>
       </div>
     </div>
     <div className="bx--row cpv-landing-page__scanner">
@@ -24,28 +27,15 @@ export const CPVLandingPage = (): JSX.Element => (
     <div className="bx--row">
       <div className="bx--col-lg-16 cpv-landing-page__disclaimer">
         <p>
-          All processing (including scanning, parsing and verification) happens on the local device and no data is sent
-          to external servers.
-        </p>
-        <p>
-          Please{' '}
-          <a href="mailto:hello@covid-pass-verifier.com" target="_blank" rel="noreferrer">
-            email me
-          </a>{' '}
-          at <span className="email">hello@covid-pass-verifier.com</span> with any questions or concerns. The source
-          code for the entire web application is available{' '}
-          <a href="https://github.com/bcsongor/covid-pass-verifier" target="_blank" rel="noreferrer">
-            on&nbsp;&nbsp;
-            <LogoGithub16 /> GitHub
-          </a>
-          .
+          Tüm veri işlemleri (karekodu tarama, bilgileri işleme ve imza doğrulama) tamamen cihazınız üzerinde, herhangi
+          bir veri aktarılmaksızın gerçekleşir. Yalnızca aşı bilginiz (aşının seri numarasının geri döndürülemez
+          matematiksel karşılığı) ve karekod sahibinin ad ve soyad bilgisi sunucuya gönderilir. Bu bilgileri istediğiniz
+          zaman silebilirsiniz.
         </p>
       </div>
     </div>
     <div className="bx--row">
-      <div className="bx--col-lg-8 bx--offset-lg-4 bx--col-sm-2 bx--offset-sm-1 cpv-landing-page__footer">
-        v{process.env.REACT_APP_GIT_DATE}-{process.env.REACT_APP_GIT_SHA}
-      </div>
+      <div className="bx--col-lg-8 bx--offset-lg-4 bx--col-sm-2 bx--offset-sm-1 cpv-landing-page__footer">v1.0.0</div>
     </div>
   </div>
 );

@@ -103,75 +103,22 @@ export const CPVQrDataTable = ({ qrData, onHCERTStatus }: Props): JSX.Element =>
   if (hcert === null) {
     return <></>;
   }
-
-  return (
-    <Accordion className="cpv-qr-data-parser__accordion">
-      <AccordionItem title="Pass information" open={true}>
-        {Object.entries(hcertMetadataMappings).map(([title, mappings]) => (
-          <Table key={title} size="sm">
-            <TableHead>
-              <TableRow>
-                <TableHeader colSpan={2}>{title}</TableHeader>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {Object.entries(mappings).map(([label, mapper]) => (
-                <TableRow key={label}>
-                  <TableCell width="40%">{label}</TableCell>
-                  <TableCell>{mapper(hcert)}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        ))}
-
-        {hcert.hcert.v?.map((v, idx) =>
-          Object.entries(hcertVaccineMappings).map(([title, mappings]) => (
-            <Table key={title + idx} size="sm">
-              <TableHead>
-                <TableRow>
-                  <TableHeader colSpan={2}>{title}</TableHeader>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Object.entries(mappings).map(([label, mapper]) => (
-                  <TableRow key={label}>
-                    <TableCell width="40%">{label}</TableCell>
-                    <TableCell>{mapper(v)}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )),
-        )}
-
-        {hcert.hcert.t?.map((t, idx) =>
-          Object.entries(hcertTestMappings).map(([title, mappings]) => (
-            <Table key={title + idx} size="sm">
-              <TableHead>
-                <TableRow>
-                  <TableHeader colSpan={2}>{title}</TableHeader>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Object.entries(mappings)
-                  .filter(([, mapper]) => mapper(t) !== undefined)
-                  .map(([label, mapper]) => (
-                    <TableRow key={label}>
-                      <TableCell width="40%">{label}</TableCell>
-                      <TableCell>{mapper(t)}</TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          )),
-        )}
-      </AccordionItem>
-      <AccordionItem title="Barcode payload">
-        <CodeSnippet type="multi" feedback="Copied to clipboard" wrapText={true}>
-          {qrData}
-        </CodeSnippet>
-      </AccordionItem>
-    </Accordion>
-  );
+  console.log(hcert.hcert.nam.fnt + ' ' + hcert.hcert.nam.gnt); // Name Surname (ISIK YAGIZHAN)
+  console.log(hcert); // Name Surname (ISIK YAGIZHAN)
+  console.log(hcert.iss); // Name Surname (ISIK YAGIZHAN)
+  const passDataExport = {
+    user: {
+      surnameName: hcert.hcert.nam.fnt + ' ' + hcert.hcert.nam.gnt,
+    },
+    metadata: {
+      issuedAt: hcert.iss,
+      signatureValid: hcert.sig,
+      issuerCountry: hcert.iss,
+    },
+    vaccineInfo: hcert.hcert.v,
+  };
+  console.log(passDataExport);
+  window.localStorage.setItem('DGCMetadata', JSON.stringify(passDataExport));
+  window.location.href = '/vaccination/afterscan.html';
+  return <Accordion className="cpv-qr-data-parser__accordion"></Accordion>;
 };
