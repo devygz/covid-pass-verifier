@@ -2,6 +2,7 @@
   "name": "covid-pass-verifier",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "/cpvext/",
   "dependencies": {
     "@carbon/grid": "^10.30.0",
     "@carbon/icons-react": "10.22.0",
